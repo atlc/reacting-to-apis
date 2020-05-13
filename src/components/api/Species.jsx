@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Col from 'react-bootstrap/Col';
 import CardDisplay from '../CardDisplay';
+import 'isomorphic-fetch';
+import 'es6-promise';
 
 class Species extends Component {
     state = {

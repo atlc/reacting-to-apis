@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import CardGroup from 'react-bootstrap/CardGroup';
 import CardDisplay from '../CardDisplay';
+import 'isomorphic-fetch';
+import 'es6-promise';
 
 class Locations extends Component {
     state = {
