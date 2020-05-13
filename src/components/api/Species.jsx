@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
-
 import CardDisplay from '../CardDisplay';
 
 class Species extends Component {

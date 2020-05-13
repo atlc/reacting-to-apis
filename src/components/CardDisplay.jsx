@@ -17,7 +17,7 @@ class CardDisplay extends Component {
                     <Card.Text>
                         {this.props.description}
                         {this.props.attributes ? <hr /> : ''}
-                        {this.props.attributes ? this.props.attributes.split('\n').map((attr, key) => <span key={key}>{attr}<br /></span>) : ''}
+                        {this.props.attributes ? this.props.attributes.split('\n').map((attr, i) => <span key={i}>{attr}<br /></span>) : ''}
                     </Card.Text>
                     </Card.Body>
                     <Card.Footer>

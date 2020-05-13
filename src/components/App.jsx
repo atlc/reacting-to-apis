@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -7,8 +6,8 @@ import Row from 'react-bootstrap/Row';
 
 import Logo from './Logo';
 import Films from './api/Films';
-import People from './api/People';
 import Locations from './api/Locations';
+import People from './api/People';
 import Species from './api/Species';
 import Vehicles from './api/Vehicles';
 
@@ -16,12 +15,12 @@ class App extends Component {
     state = {
         isInitialLoad: true,
         endpointToLoad: null,
-        buttons: ['Films', 'People', 'Locations', 'Species', 'Vehicles'],
+        buttonTitles: ['Films', 'People', 'Locations', 'Species', 'Vehicles'],
         buttonPanel: []
     }
 
     componentDidMount() {
-        const buttons = this.state.buttons.map((btn, i) => 
+        const buttons = this.state.buttonTitles.map((btn, i) => 
             <Col key={i} >
                 <Button variant='info' onClick={() => this.handleButtonClick(btn)} style={{marginTop: "5px", marginBottom: "15px"}}>
                     Load All {btn}
