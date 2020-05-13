@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 
 import Logo from './Logo';
 import Films from './api/Films';
@@ -10,7 +11,6 @@ import People from './api/People';
 import Locations from './api/Locations';
 import Species from './api/Species';
 import Vehicles from './api/Vehicles';
-
 
 class App extends Component {
     state = {
@@ -24,7 +24,7 @@ class App extends Component {
         const buttons = this.state.buttons.map((btn, i) => 
             <Col key={i} >
                 <Button variant='info' onClick={() => this.handleButtonClick(btn)} style={{marginTop: "5px", marginBottom: "15px"}}>
-                    Render All {btn}
+                    Load All {btn}
                 </Button>
             </Col>
         );
@@ -52,7 +52,7 @@ class App extends Component {
 
     render() {
         return (
-            <Container>
+            <Container fluid>
                 <Row>
                     {this.state.isInitialLoad ? <Logo /> : ''}
                 </Row>
@@ -60,7 +60,7 @@ class App extends Component {
                     {this.state.isInitialLoad ? <> {this.state.buttonPanel} </>: ''}
                 </Row>
                 <Row>
-                    {this.state.endpointToLoad ?  <Films /> : ''}
+                    {this.state.endpointToLoad}
                 </Row>
             </Container>
         );

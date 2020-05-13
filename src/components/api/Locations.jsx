@@ -1,64 +1,44 @@
 import React, { Component } from 'react';
-import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import CardDisplay from '../CardDisplay';
 
-class Films extends Component {
+class Locations extends Component {
     state = {
-        weather: null
+        locations: null
     }
 
     componentDidMount() {
-        // fetch(`https://api.openweathermap.org/data/2.5/weather?zip=35205,us&appid=${this.props.props.API_KEY}`)
-        //     .then(res => res.body)
-        //     .then(res => this.setState({weather: res}))
-        //     .then(console.log(this.state))
+        fetch('https://ghibliapi.herokuapp.com/locations')
+            .then(res => res.json())
+            .then(res => this.setState({locations: res}))
     }
 
     render() {
+        debugger;
         return (
-            <>
-                <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
-                    <Card.Body>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                        This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                    </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                    <small className="text-muted">Last updated 3 mins ago</small>
-                    </Card.Footer>
-                </Card>
-                <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
-                    <Card.Body>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                        This card has supporting text below as a natural lead-in to additional
-                        content.{' '}
-                    </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                    <small className="text-muted">Last updated 3 mins ago</small>
-                    </Card.Footer>
-                </Card>
-                <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
-                    <Card.Body>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                        This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to
-                        show that equal height action.
-                    </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                    <small className="text-muted">Last updated 3 mins ago</small>
-                    </Card.Footer>
-                </Card>
-            </>
+            <CardGroup>
+                {this.state.locations ? this.state.locations.map(location =>
+                    <CardDisplay
+                        key={location.id}
+                        id={location.id}
+                        title={location.name}
+                        description={`${location.climate} Climate; ${location.terrain} Terrain `}
+                        attributes={
+                            `Surface water percentage: ${location.surface_water}%
+                            `
+                        }
+                        // Waiting for react router to send these as attrs
+                        // JSON of known residents: ${location.residents}
+                        // JSON of films featured in: ${location.films}
+                        // Full JSON URL: ${location.url}
+
+                        buttonText={'See some pictures of me on Google Images!'}
+                        buttonLink={`https://www.google.com/search?tbm=isch&q=studio+ghibli+${location.name}`}
+                    />
+                ) : null}
+            </CardGroup>
         );
     }
 }
 
-export default Films;
+export default Locations;

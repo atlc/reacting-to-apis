@@ -19,8 +19,17 @@ class Films extends Component {
                 {this.state.films ? this.state.films.map(film =>
                     <CardDisplay
                         key={film.id}
+                        id={film.id}
                         title={film.title}
-                        description={film.description}          
+                        description={film.description}
+                        attributes={
+                            `Directed by: ${film.director}
+                            Produced by: ${film.producer}
+                            Release date: ${film.release_date}
+                            Rotten Tomatoes score: ${film.rt_score}`
+                        }
+                        buttonText={'See more info in an IMDB search!'}
+                        buttonLink={`https://www.imdb.com/find?q=${film.title}+${film.release_date}`}
                     />
                 ) : null}
             </CardGroup>

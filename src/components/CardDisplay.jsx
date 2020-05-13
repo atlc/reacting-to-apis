@@ -6,20 +6,23 @@ import Button from 'react-bootstrap/Button';
 class CardDisplay extends Component {
     render() {
         return (
-            <Col sm={2} md={3} lg={4}>
+            <Col>
                 <Card className='text-center' style={{marginTop: "5px", marginBottom: "15px"}}>
                     <img src={require('../assets/logo.png')} style={{maxWidth: '90vw'}} alt='The Studio Ghibli logo' />
                     <hr />
                     <Card.Body>
                     <Card.Title className='font-weight-bold'>{this.props.title}</Card.Title>
+                    <Card.Title className='text-muted'>ID: {this.props.id}</Card.Title>
                     <hr />
                     <Card.Text>
                         {this.props.description}
+                        {this.props.attributes ? <hr /> : ''}
+                        {this.props.attributes ? this.props.attributes.split('\n').map((attr, key) => <span key={key}>{attr}<br /></span>) : ''}
                     </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <Button href={`https://www.imdb.com/find?q=${this.props.title}`}>
-                            See more info in an IMDB search!
+                        <Button href={this.props.buttonLink} variant={'dark'}>
+                            {this.props.buttonText}
                         </Button>
                     </Card.Footer>
                 </Card>
