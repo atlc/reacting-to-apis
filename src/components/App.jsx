@@ -3,34 +3,64 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import WeatherCards from './WeatherCards';
+
+import Logo from './Logo';
+import Films from './api/Films';
+import People from './api/People';
+import Locations from './api/Locations';
+import Species from './api/Species';
+import Vehicles from './api/Vehicles';
+
 
 class App extends Component {
     state = {
-        API_KEY: "e4891fdb6e899264dd4a148373e7fbe6", // An absolute cardinal sin in production, I know
-        showTodayOnly: true
+        isInitialLoad: true,
+        endpointToLoad: null,
+        buttons: ['Films', 'People', 'Locations', 'Species', 'Vehicles'],
+        buttonPanel: []
     }
 
-    handleToggleForecast = () => {
-        this.setState({showTodayOnly: !this.state.showTodayOnly});
+    componentDidMount() {
+        const buttons = this.state.buttons.map((btn, i) => 
+            <Col key={i} >
+                <Button variant='info' onClick={() => this.handleButtonClick(btn)}>
+                    Render All {btn}
+                </Button>
+            </Col>
+        );
+
+        this.setState({buttonPanel: buttons});
+    }
+
+    handleButtonClick = (endpoint) => {
+        let endpointComponent;
+        
+        switch(endpoint) {
+            case 'Films': endpointComponent = <Films />; break;
+            case 'People': endpointComponent = <People />; break;
+            case 'Locations': endpointComponent = <Locations />; break;
+            case 'Species': endpointComponent = <Species />; break;
+            case 'Vehicles': endpointComponent = <Vehicles />; break;
+            default: return;
+        }
+
+        this.setState({
+            isInitialLoad: false,
+            endpointToLoad: endpointComponent
+        });
     }
 
     render() {
         return (
             <Container>
                 <Row>
-                    <Col>
-                        <Button
-                            variant="warning"
-                            className="my-4"
-                            onClick={this.handleToggleForecast}
-                        >
-                            {this.state.showTodayOnly ? 'Show 30 day forecast' : 'See current conditions'}
-                        </Button>
-                    </Col>
+                    {this.state.isInitialLoad ? <Logo /> : ''}
                 </Row>
                 <Row>
-                    <WeatherCards props={this.state} />
+                    {this.state.isInitialLoad ? <> {this.state.buttonPanel} </>: ''}
+                </Row>
+                <Row>
+                    {this.state.endpointToLoad ?  <Films /> : ''}
                 </Row>
             </Container>
         );
