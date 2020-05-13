@@ -23,7 +23,7 @@ class App extends Component {
     componentDidMount() {
         const buttons = this.state.buttons.map((btn, i) => 
             <Col key={i} >
-                <Button variant='info' onClick={() => this.handleButtonClick(btn)}>
+                <Button variant='info' onClick={() => this.handleButtonClick(btn)} style={{marginTop: "5px", marginBottom: "15px"}}>
                     Render All {btn}
                 </Button>
             </Col>

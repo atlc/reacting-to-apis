@@ -20,7 +20,7 @@ class Films extends Component {
                     <CardDisplay
                         key={film.id}
                         title={film.title}
-                        description={film.description}              
+                        description={film.description}          
                     />
                 ) : null}
             </CardGroup>

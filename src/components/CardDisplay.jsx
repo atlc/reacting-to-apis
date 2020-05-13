@@ -6,11 +6,13 @@ import Button from 'react-bootstrap/Button';
 class CardDisplay extends Component {
     render() {
         return (
-            <Col md={4}>
-                <Card>
-                    <img src="../assets/logo.png" alt='The Studio Ghibli logo' />
+            <Col sm={2} md={3} lg={4}>
+                <Card className='text-center' style={{marginTop: "5px", marginBottom: "15px"}}>
+                    <img src={require('../assets/logo.png')} style={{maxWidth: '90vw'}} alt='The Studio Ghibli logo' />
+                    <hr />
                     <Card.Body>
-                    <Card.Title>{this.props.title}</Card.Title>
+                    <Card.Title className='font-weight-bold'>{this.props.title}</Card.Title>
+                    <hr />
                     <Card.Text>
                         {this.props.description}
                     </Card.Text>
@@ -19,7 +21,6 @@ class CardDisplay extends Component {
                         <Button href={`https://www.imdb.com/find?q=${this.props.title}`}>
                             See more info in an IMDB search!
                         </Button>
-                        <small className="text-muted">Fin</small>
                     </Card.Footer>
                 </Card>
             </Col>
